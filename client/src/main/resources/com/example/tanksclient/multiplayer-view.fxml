@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" 
+            fx:controller="com.example.tanksclient.MultiplayerController"
+            styleClass="border-pane"
+            stylesheets="@start.css">
+    <top>
+        <BorderPane BorderPane.alignment="CENTER" styleClass="lobby-header">
+            <left>
+                <HBox alignment="CENTER_LEFT" spacing="8">
+                    <padding>
+                        <Insets top="12" right="12" bottom="12" left="12" />
+                    </padding>
+                    <Button fx:id="backButton" text="← Back" onAction="#onBack" styleClass="back-button" />
+                </HBox>
+            </left>
+            <center>
+                <Label text="Multiplayer Lobbies" styleClass="lobby-title" BorderPane.alignment="CENTER" />
+            </center>
+            <right>
+                <VBox fx:id="userInfoBox" alignment="CENTER_RIGHT" spacing="2" visible="false" styleClass="user-info-box">
+                    <padding>
+                        <Insets top="8" right="12" bottom="8" left="12" />
+                    </padding>
+                    <Label fx:id="userNameLabel" text="" styleClass="username" />
+                    <Label fx:id="userStatsLabel" text="" styleClass="user-stats" />
+                </VBox>
+            </right>
+        </BorderPane>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER" spacing="20" styleClass="lobby-content">
+            <padding>
+                <Insets top="20" right="30" bottom="20" left="30" />
+            </padding>
+            <TextField fx:id="searchField" promptText="Search by lobby name..." styleClass="lobby-search-field" />
+            <ListView fx:id="lobbyListView" prefHeight="420" prefWidth="780" styleClass="lobby-list" />
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER" spacing="15" styleClass="lobby-footer">
+            <padding>
+                <Insets top="12" right="12" bottom="12" left="12" />
+            </padding>
+            <Button fx:id="createLobbyButton" text="Create Lobby" onAction="#onCreateLobby" styleClass="lobby-button-primary" />
+            <Button fx:id="joinLobbyButton" text="Join Lobby" onAction="#onJoinLobby" styleClass="lobby-button-primary" />
+            <Button fx:id="refreshButton" text="Refresh" onAction="#onRefreshLobbies" styleClass="lobby-button-secondary" />
+        </HBox>
+    </bottom>
+</BorderPane>

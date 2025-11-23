@@ -1,0 +1,50 @@
+# --- Build Tools (Maven & Gradle) ---
+target/
+build/
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+!.mvn/wrapper/maven-wrapper.jar
+
+# Wyjątki, żeby nie ignorować kodu źródłowego przypadkiem
+!**/src/main/**/build/
+!**/src/test/**/build/
+!**/src/main/**/target/
+!**/src/test/**/target/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+# --- IntelliJ IDEA ---
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# --- Eclipse / STS ---
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache
+bin/
+
+# --- NetBeans ---
+nbproject/private/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# --- VS Code ---
+.vscode/
+
+# --- Mac OS ---
+.DS_Store
+
+# --- Inne ---
+HELP.md
+.kotlin

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.tanksclient.HelloController"
+            style="-fx-background-color: linear-gradient(to bottom, #1a2e1a, #0d1f0d);">
+    <top>
+        <HBox spacing="10" alignment="CENTER" style="-fx-background-color: rgba(15, 35, 20, 0.85); -fx-padding: 8;">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
+            <VBox alignment="CENTER" spacing="2">
+                <Label fx:id="usernameLabel" text="You" style="-fx-text-fill: #7ea76b; -fx-font-weight: bold; -fx-font-size: 13px;" />
+                <ProgressBar fx:id="playerHealthBar" prefWidth="200" progress="1.0" />
+                <Label fx:id="playerHealthLabel" text="Player: 100" style="-fx-text-fill: white; -fx-font-size: 12px;" />
+                <HBox alignment="CENTER" spacing="6">
+                    <Label fx:id="moneyLabel" text="\$0" style="-fx-text-fill: #FFF176; -fx-font-weight: bold;" />
+                </HBox>
+                <Label fx:id="bonusesLabel" text="" style="-fx-font-size:11px; -fx-text-fill: #a8d08d;" />
+                <Label fx:id="playerStatsLabel" text="Wins: 0 | Loses: 0 | Draws: 0" translateX="8" style="-fx-font-size:11px; -fx-text-fill: #cccccc;" />
+            </VBox>
+            <VBox alignment="CENTER" spacing="4" HBox.hgrow="ALWAYS">
+                <Label fx:id="timerLabel" text="03:00" style="-fx-font-size:18px; -fx-font-weight: bold; -fx-text-fill: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 4, 0, 0, 0);" />
+                <Button fx:id="shopButton" text="🛒" onAction="#onToggleShop" style="-fx-font-size: 16px; -fx-background-color: linear-gradient(#7ea76b, #5a7d52); -fx-text-fill: white; -fx-background-radius: 8; -fx-cursor: hand;" />
+            </VBox>
+            <VBox alignment="CENTER" spacing="2">
+                <Label fx:id="enemyUsernameLabel" text="Enemy" style="-fx-text-fill: #ff7070; -fx-font-weight: bold; -fx-font-size: 13px;" />
+                <ProgressBar fx:id="enemyHealthBar" prefWidth="200" progress="1.0" />
+                <Label fx:id="enemyHealthLabel" text="Enemy: 100" style="-fx-text-fill: white; -fx-font-size: 12px;" />
+                <Label fx:id="enemyMoneyLabel" text="\$0" style="-fx-text-fill: #FFF176; -fx-font-weight: bold;" />
+                <Label fx:id="enemyBonusesLabel" text="" style="-fx-font-size:11px; -fx-text-fill: #a8d08d;" />
+                <Label fx:id="enemyStatsLabel" text="Wins: 0 | Loses: 0 | Draws: 0" translateX="8" style="-fx-font-size:11px; -fx-text-fill: #cccccc;" />
+            </VBox>
+        </HBox>
+    </top>
+
+    <center>
+        <StackPane style="-fx-background-color: #1a3a1a;">
+            <Canvas fx:id="gameCanvas" width="900" height="600" style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0, 0, 0);" />
+
+            <!-- Start barrier countdown label -->
+            <Label fx:id="startCountdownLabel" text="5" style="-fx-font-size:64px; -fx-text-fill:white; -fx-font-weight:bold; -fx-background-color: rgba(0,0,0,0.5); -fx-padding:20;" visible="false" />
+
+            <!-- Selection overlay shown before the game starts -->
+            <VBox fx:id="selectionPane" alignment="CENTER" spacing="10" style="-fx-background-color: rgba(0,0,0,0.6);">
+                <Label text="Choose your tank" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" />
+                <HBox spacing="10" alignment="CENTER">
+                    <Button text="Small" onAction="#onSelectSmall" />
+                    <Button text="Medium" onAction="#onSelectMedium" />
+                    <Button text="Large" onAction="#onSelectLarge" />
+                </HBox>
+                <Label text="Small: fast, low HP, low damage. Medium: balanced. Large: slow, high HP, high damage." wrapText="true" style="-fx-text-fill: white; -fx-font-size: 12px;" />
+            </VBox>
+
+            <!-- End game overlay -->
+            <VBox fx:id="endPane" alignment="CENTER" spacing="12" style="-fx-background-color: rgba(0,0,0,0.7); -fx-padding:20;" visible="false">
+                <Label fx:id="endMessageLabel" text="Result" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" />
+                <Button text="Back" onAction="#onBackToStart" />
+            </VBox>
+
+            <!-- Small shop popup shown when clicking the cart -->
+                        <AnchorPane fx:id="shopPane" style="-fx-background-color: rgba(0,0,0,0.85); -fx-padding:8; -fx-border-color: white; -fx-border-width:1; -fx-background-radius:8; -fx-border-radius:8; -fx-max-width:260px;"
+                                    visible="false" StackPane.alignment="TOP_LEFT" translateX="10" translateY="10">
+                            <VBox fx:id="shopContent" spacing="6" AnchorPane.topAnchor="8.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0">
+                                <Label text="Shop" style="-fx-text-fill:white; -fx-font-weight:bold;" />
+                                <Button text="Speed - $50" onAction="#onBuySpeed" prefWidth="220" style="-fx-background-color: linear-gradient(#FFF9C4,#FFF176); -fx-text-fill: black;" />
+                                <Button text="Damage - $50" onAction="#onBuyDamage" prefWidth="220" style="-fx-background-color: linear-gradient(#FF8A80,#FF5252); -fx-text-fill: black;" />
+                                <Button text="HP - $50" onAction="#onBuyHP" prefWidth="220" style="-fx-background-color: linear-gradient(#FFF0F6,#FFD6E7); -fx-text-fill: black;" />
+                                <Button text="Bullet Size - $50" onAction="#onBuyBulletSize" prefWidth="220" style="-fx-background-color: linear-gradient(#FFE0B2,#FFB74D); -fx-text-fill: black;" />
+                            </VBox>
+                            <Button text="X" onAction="#onCloseShop" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-weight:bold; -fx-border-color: transparent;" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="6.0" />
+                        </AnchorPane>
+        </StackPane>
+    </center>
+</BorderPane>
